@@ -19,7 +19,7 @@ const Login = () => {
 
     signInUser(email, password)
       .then((userCredential) => {
-        console.log("Successfully login", userCredential);
+        console.log("Successfully login");
         event.target.reset();
         navigate(location.state ? location.state : "/");
         setSuccess(true);

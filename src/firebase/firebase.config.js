@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAHGD00Jt3hfJynzZNz087gE9_8ZWLSQHU",
-  authDomain: "the-bangladesh-times-b9861.firebaseapp.com",
-  projectId: "the-bangladesh-times-b9861",
-  storageBucket: "the-bangladesh-times-b9861.firebasestorage.app",
-  messagingSenderId: "522252300879",
-  appId: "1:522252300879:web:feb409249000afddbeb03a",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase
