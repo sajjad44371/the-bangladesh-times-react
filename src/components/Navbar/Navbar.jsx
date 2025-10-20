@@ -6,13 +6,13 @@ const Navbar = () => {
   return (
     <>
       <div className="flex justify-between items-center">
-        <div className=""></div>
-        <div className="nav flex gap-4 text-lg text-accent">
+        <div className="flex-1"></div>
+        <div className="nav mx-auto flex gap-4 text-lg text-accent">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/career">Career</NavLink>
         </div>
-        <div className="login-btn flex justify-between items-center">
+        <div className="flex-1 login-btn flex justify-end items-center gap-3">
           <img src={userImg} alt="" />
           <button className="btn btn-primary px-8">Login</button>
         </div>

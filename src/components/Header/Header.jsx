@@ -12,7 +12,7 @@ const Header = () => {
           Journalism Without Fear or Favour
         </p>
         <p className="text-accent font-medium text-xl">
-          {format(new Date(), "EEEE, MMMM MM, yyyy")}
+          {format(new Date(), "EEEE, MMMM dd, yyyy")}
         </p>
       </div>
     </>
