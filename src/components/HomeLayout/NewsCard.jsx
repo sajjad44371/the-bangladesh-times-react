@@ -2,11 +2,13 @@ import React from "react";
 import { FiBookmark, FiShare2 } from "react-icons/fi";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
   if (!news) return null;
 
   const {
+    id,
     title,
     image_url,
     thumbnail_url,
@@ -78,7 +80,7 @@ const NewsCard = ({ news }) => {
       {/* image */}
       <div className="px-4 pb-4">
         <img
-          src={image_url || thumbnail_url}
+          src={thumbnail_url || image_url}
           alt={title}
           className="w-full h-56 md:h-64 object-cover rounded-lg"
         />
@@ -88,12 +90,13 @@ const NewsCard = ({ news }) => {
       <div className="px-4 pb-4 pt-4">
         <div className="mb-4">
           <p className="text-sm text-gray-600 mb-3">{excerpt}</p>
-          <a
+          <Link
+            to={`/news-details/${id}`}
             href="#read-more"
             className="text-orange-500 font-medium hover:underline"
           >
             Read More
-          </a>
+          </Link>
         </div>
 
         <div className="flex items-center justify-between gap-4 border-t py-3">

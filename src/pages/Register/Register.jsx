@@ -1,8 +1,40 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { use, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../provider/AuthContext";
 
 const Register = () => {
+  const { createUser, updateUser, setUser } = use(AuthContext);
+  const navigate = useNavigate();
+
   const [terms, setTerms] = useState(false);
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const photoURL = event.target.photo.value;
+    const password = event.target.password.value;
+
+    // console.log(name, email, photoURL, password);
+
+    // create user
+    createUser(email, password)
+      .then((userCredential) => {
+        console.log("Successfully created user", userCredential);
+        event.target.reset();
+        updateUser({ displayName: name, photoURL: photoURL })
+          .then(() => {
+            console.log("Created");
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error.code);
+          });
+      })
+      .catch((error) => {
+        console.log("Error happened", error.message);
+      });
+  };
   return (
     <>
       <div className="card bg-base-100 mx-auto w-full max-w-lg shrink-0 shadow-lg rounded-md">
@@ -12,7 +44,7 @@ const Register = () => {
               Login your account
             </h1>
           </div>
-          <form className="py-8">
+          <form onSubmit={handleRegister} className="py-8">
             <fieldset className="fieldset">
               {/* name field  */}
               <label className="label text-xl text-primary font-semibold">
@@ -23,6 +55,7 @@ const Register = () => {
                 name="name"
                 className="input w-full bg-base-200 border-0 outline-0"
                 placeholder="Enter your name"
+                required
               />
               {/* photo field  */}
               <label className="label text-xl text-primary font-semibold">
@@ -30,9 +63,10 @@ const Register = () => {
               </label>
               <input
                 type="text"
-                name="name"
+                name="photo"
                 className="input w-full bg-base-200 border-0 outline-0"
                 placeholder="Enter your photo URL"
+                required
               />
               {/* email field  */}
               <label className="label text-xl text-primary font-semibold">
@@ -43,6 +77,7 @@ const Register = () => {
                 name="email"
                 className="input w-full bg-base-200 border-0 outline-0"
                 placeholder="Enter your email address"
+                required
               />
               {/* password field  */}
               <label className="label text-xl text-primary font-semibold">
@@ -53,6 +88,7 @@ const Register = () => {
                 name="password"
                 className="input w-full bg-base-200 border-0 outline-0"
                 placeholder="Enter your password"
+                required
               />
               {/* terms  */}
               <div>
@@ -67,7 +103,11 @@ const Register = () => {
                   Accept Term & Conditions
                 </label>
               </div>
-              <button className="btn btn-primary mt-4" disabled={!terms}>
+              <button
+                type="submit"
+                className="btn btn-primary mt-4"
+                disabled={!terms}
+              >
                 Register
               </button>
               <p>
